@@ -10,6 +10,8 @@ import CustomWorkout from "./customworkout.js";
 
 const app = express()
 mongoose.connect('mongodb+srv://cyrilmwalimuke_db_user:KpH4GHidcUwGdGby@next-step.83wjhk5.mongodb.net').then(()=>console.log("connected to mongodb")).catch((err)=>console.log(err))
+app.use(express.json());
+app.use(cors());
 
 
 app.get("/",(req,res)=>{
@@ -17,6 +19,7 @@ app.get("/",(req,res)=>{
 })
 
 app.post("/add-exercise", async (req, res) => {
+   console.log("incoming exercise request")
     const {name,description,imageUrl,difficulty,targetedMuscleGroups}=req.body
     const workout =Exercise({name,description,imageUrl,difficulty,targetedMuscleGroups});
     await workout.save();
@@ -40,6 +43,7 @@ app.post("/add-exercise", async (req, res) => {
   )
 
   app.get('/exercises/:id',async(req,res)=>{
+   
     const {id}=req.params;
     try{
         const workout = await Exercise.findById(id);
@@ -209,6 +213,3 @@ app.post("/add-exercise", async (req, res) => {
 app.listen(3000,()=>{
     console.log("Server is running on port 3000")
 })
-
-// 8c+e&G2Yy_jSWaP
-// IEBC-0009-20251013-587A56
