@@ -173,6 +173,7 @@ app.post("/add-exercise", async (req, res) => {
 
   
   app.get('/history-workouts/:id',async(req,res)=>{
+    console.log("Fetching workout with ID:", req.params.id);
     const {id}=req.params;
     try{
         const workout = await Workout.findById(id);
